@@ -37,6 +37,6 @@ class ArchivedProject extends Model
 
     return User::on('mysql')
         ->where('id', $this->archived_by)
-        ->value('name') ?? 'Unknown User';
+        ->value('name') ?? 'No longer be associated with any active user';
 }
 }

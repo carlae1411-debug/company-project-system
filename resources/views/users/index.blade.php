@@ -21,10 +21,17 @@
         </div>
 
 @if(auth()->user()->role === 'administrator')
-    <a href="{{ route('users.create') }}" class="primary-action-button">
-        <i class="fa-solid fa-user-plus"></i>
+    <div class="page-actions">
+
+    <a href="{{ route('users.trashed') }}" class="btn btn-secondary">
+        Deleted Users
+    </a>&nbsp;
+    
+    <a href="{{ route('users.create') }}" class="btn btn-primary">
         Add User
     </a>
+
+</div>
 @endif
 
     </div>

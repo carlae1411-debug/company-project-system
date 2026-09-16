@@ -125,6 +125,13 @@ Route::delete('/archive/{archivedProject}', [ArchivedProjectController::class, '
     ->middleware(['auth', 'prevent.back', 'role:administrator'])
     ->name('archive.destroy'); 
 
+Route::get('/users/trashed', [UserController::class, 'trashed'])
+    ->middleware([
+        'auth',
+        'prevent.back',
+        'role:administrator',
+    ])
+    ->name('users.trashed');
 
 Route::resource('users', UserController::class)
     ->middleware([
@@ -132,6 +139,22 @@ Route::resource('users', UserController::class)
         'prevent.back',
         'role:administrator',
     ]);
+
+    Route::post('/users/{id}/restore', [UserController::class, 'restore'])
+    ->middleware([
+        'auth',
+        'prevent.back',
+        'role:administrator',
+    ])
+    
+    ->name('users.restore');
+    Route::delete('/users/{id}/force-delete', [UserController::class, 'forceDelete'])
+    ->middleware([
+        'auth',
+        'prevent.back',
+        'role:administrator',
+    ])
+    ->name('users.forceDelete');
 
     Route::get('/user-logs', [ActivityLogController::class, 'index'])
     ->middleware([

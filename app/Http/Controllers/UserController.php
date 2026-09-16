@@ -206,4 +206,94 @@ ActivityLog::record(
             'User deleted successfully.'
         );
 }
+
+public function restore($id)
+{
+    $user = User::onlyTrashed()->findOrFail($id);
+
+    $userName = $user->name;
+    $userEmail = $user->email;
+
+    $user->restore();
+
+    ActivityLog::record(
+        'restored_user',
+        'Restored user ' .
+        $userName .
+        ' (' .
+        $userEmail .
+        ')'
+    );
+
+    return redirect()
+        ->route('users.index')
+        ->with(
+            'success',
+            'User restored successfully.'
+        );
+}
+
+public function trashed()
+{
+    $users = User::onlyTrashed()
+        ->latest('deleted_at')
+        ->get();
+
+    return view('users.trashed', compact('users'));
+}
+
+public function forceDelete($id)
+{
+    $user = User::onlyTrashed()->findOrFail($id);
+
+    // Prevent deleting yourself
+    if ($user->id === auth()->id()) {
+        return redirect()
+            ->route('users.trashed')
+            ->with(
+                'error',
+                'You cannot permanently delete your own account.'
+            );
+    }
+
+    // Prevent deleting the last administrator
+    if ($user->role === 'administrator') {
+        $administratorCount = User::where(
+            'role',
+            'administrator'
+        )->count();
+
+        if ($administratorCount <= 1) {
+            return redirect()
+                ->route('users.trashed')
+                ->with(
+                    'error',
+                    'You cannot permanently delete the last administrator account.'
+                );
+        }
+    }
+
+    $userName = $user->name;
+    $userEmail = $user->email;
+
+    $user->forceDelete();
+
+    ActivityLog::record(
+        'permanently_deleted_user',
+        'Permanently deleted user ' .
+        $userName .
+        ' (' .
+        $userEmail .
+        ')'
+    );
+
+    return redirect()
+        ->route('users.trashed')
+        ->with(
+            'success',
+            'User permanently deleted.'
+        );
+}
+
+
 }

@@ -1,0 +1,84 @@
+/* Hidden during normal viewing */
+.print-header {
+    display: none;
+}
+
+/* Print Preview */
+@media print {
+
+    @page {
+        size: A4 landscape;
+        margin: 12mm;
+    }
+
+    body {
+        background: #ffffff !important;
+    }
+
+    /* Hide elements that should not appear on paper */
+    .sidebar,
+    .navbar,
+    .topbar,
+    .filters,
+    .search-form,
+    .pagination,
+    button,
+    .btn {
+        display: none !important;
+    }
+
+    /* Show print header */
+    .print-header {
+        display: block !important;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #000;
+        padding-bottom: 10px;
+    }
+
+    .print-header h1 {
+        margin: 0;
+        font-size: 22px;
+    }
+
+    .print-header p {
+        margin: 5px 0 0;
+        font-size: 12px;
+    }
+
+    /* Make logs use the full page */
+    .main-content,
+    .content,
+    .activity-logs-page {
+        width: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    table {
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+
+    th,
+    td {
+        border: 1px solid #000 !important;
+        padding: 7px !important;
+        font-size: 10px !important;
+        color: #000 !important;
+        background: #fff !important;
+    }
+
+    th {
+        font-weight: bold !important;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+
+    a {
+        color: #000 !important;
+        text-decoration: none !important;
+    }
+}

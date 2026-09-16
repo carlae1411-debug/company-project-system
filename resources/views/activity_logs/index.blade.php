@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-
+<link rel="stylesheet" href="{{ asset('css/user-logs-print.css') }}">
 <div class="page-header">
     <div>
         <h1>User Logs</h1>
@@ -136,14 +136,29 @@
     {{-- Summary --}}
 
     <div class="logs-summary">
-
-        <div>
+            <div>
             <strong>{{ $logs->total() }}</strong>
             <span>Activity Logs</span>
         </div>
+        <button
+    type="button"
+    class="btn btn-secondary"
+    onclick="window.print()"
+>
+    <i class="fa-solid fa-print"></i>
+    Print Logs
+</button>
 
     </div>
+<div class="print-header">
+    <h1>User Activity Logs</h1>
 
+    <p>
+        Generated:
+        {{ now()->format('M d, Y h:i A') }}
+    </p>
+</div>
+    
 
     {{-- Table --}}
 

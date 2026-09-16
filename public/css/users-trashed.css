@@ -1,0 +1,267 @@
+/* ================================
+   Deleted Users Page
+================================ */
+
+.deleted-users-page {
+    width: 100%;
+}
+
+.deleted-users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.deleted-users-header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.deleted-users-header p {
+    margin: 6px 0 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+/* Header buttons */
+
+.deleted-users-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Card */
+
+.deleted-users-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Table */
+
+.deleted-users-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.deleted-users-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.deleted-users-table thead {
+    background: #f8fafc;
+}
+
+.deleted-users-table th {
+    padding: 15px 18px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #64748b;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+.deleted-users-table td {
+    padding: 16px 18px;
+    font-size: 14px;
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: middle;
+}
+
+.deleted-users-table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.deleted-users-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.deleted-users-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* User name */
+
+.deleted-user-name {
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.deleted-user-email {
+    color: #64748b;
+}
+
+/* Role badge */
+
+.deleted-role-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    background: #f1f5f9;
+    color: #475569;
+}
+
+/* Deleted date */
+
+.deleted-date {
+    color: #64748b;
+    white-space: nowrap;
+}
+
+/* Restore button */
+
+.restore-user-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 8px 13px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #16a34a;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.restore-user-btn:hover {
+    background: #15803d;
+    transform: translateY(-1px);
+}
+
+.restore-user-btn:active {
+    transform: translateY(0);
+}
+
+/* Empty state */
+
+.deleted-users-empty {
+    padding: 70px 30px;
+    text-align: center;
+}
+
+.deleted-users-empty-icon {
+    width: 56px;
+    height: 56px;
+
+    margin: 0 auto 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f1f5f9;
+    color: #64748b;
+
+    font-size: 22px;
+}
+
+.deleted-users-empty h3 {
+    margin: 0 0 6px;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    color: #1e293b;
+}
+
+.deleted-users-empty p {
+    margin: 0;
+
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Alerts */
+
+.deleted-users-page .alert {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    padding: 12px 15px;
+    font-size: 14px;
+}
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .deleted-users-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .deleted-users-actions {
+        width: 100%;
+    }
+
+    .deleted-users-actions a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .deleted-users-table th,
+    .deleted-users-table td {
+        padding: 13px 14px;
+    }
+
+}
+
+.permanent-delete-user-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 8px 13px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #dc2626;
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.permanent-delete-user-btn:hover {
+    background: #b91c1c;
+    transform: translateY(-1px);
+}
+
+.permanent-delete-user-btn:active {
+    transform: translateY(0);
+}

@@ -606,7 +606,7 @@ function confirmDeleteUser() {
     return confirm(
         `Delete "${userName}"?\n\n` +
         `WARNING: This action cannot be undone.\n` +
-        `The user account will be permanently deleted.`
+        `The user account will be deleted. All archived projects related to this user will remain in the system but will no longer be associated with any active user.`
     );
 }
 
