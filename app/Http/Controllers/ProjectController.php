@@ -147,21 +147,23 @@ class ProjectController extends Controller
             $projectCode = $project->project_code;
             $projectName = $project->name;
 
-            $project->delete();
+            DB::transaction(function () use ($project, $projectCode, $projectName) {
+                $project->delete();
 
-            /*
-            |--------------------------------------------------------------------------
-            | Activity Log
-            |--------------------------------------------------------------------------
-            */
+                /*
+                |--------------------------------------------------------------------------
+                | Activity Log
+                |--------------------------------------------------------------------------
+                */
 
-            ActivityLog::record(
-                'archived_project',
-                'Archived project ' .
-                $projectCode .
-                ' - ' .
-                $projectName
-            );
+                ActivityLog::record(
+                    'archived_project',
+                    'Archived project ' .
+                    $projectCode .
+                    ' - ' .
+                    $projectName
+                );
+            });
 
             return redirect()
                 ->route('projects.index')
@@ -192,21 +194,41 @@ class ProjectController extends Controller
         $projectCode = $project->project_code;
         $projectName = $project->name;
 
-        $project->delete();
-
         /*
         |--------------------------------------------------------------------------
-        | Activity Log
+        | Archive History + Permanent Delete
         |--------------------------------------------------------------------------
         */
 
-        ActivityLog::record(
-            'deleted_project',
-            'Deleted project ' .
-            $projectCode .
-            ' - ' .
-            $projectName
-        );
+        DB::connection('mysql_archive')->transaction(function () use ($project) {
+            ArchiveHistory::create([
+                'original_project_id' => $project->id,
+                'project_code' => $project->project_code,
+                'name' => $project->name,
+                'client' => $project->client,
+                'action' => 'permanently_deleted',
+                'action_at' => now(),
+                'action_by' => auth()->user()->id,
+            ]);
+        });
+
+        DB::transaction(function () use ($project, $projectCode, $projectName) {
+            $project->delete();
+
+            /*
+            |--------------------------------------------------------------------------
+            | Activity Log
+            |--------------------------------------------------------------------------
+            */
+
+            ActivityLog::record(
+                'deleted_project',
+                'Deleted project ' .
+                $projectCode .
+                ' - ' .
+                $projectName
+            );
+        });
 
         return redirect()
             ->route('projects.index')
